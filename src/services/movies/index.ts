@@ -20,7 +20,8 @@ export default class MovieService {
   }
 
   async updateMovie(movieId:string, movieUpdateData: UpdateMovieDTO) {
-    const movieUpdated = await this.MovieStorage.update(movieId, movieUpdateData);
+    await this.MovieStorage.update(movieId, movieUpdateData);
+    const movieUpdated = this.MovieStorage.getById(movieId);
     return movieUpdated;
   }
 
