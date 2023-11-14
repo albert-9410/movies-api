@@ -6,5 +6,6 @@ const aMovieController = new MovieController();
 
 app.post('/', aMovieController.createMovie);
 app.delete('/:id', aMovieController.deleteMovie);
+app.get('/', aMovieController.getAllPaginated);
 
 export default app;

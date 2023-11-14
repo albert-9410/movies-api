@@ -1,4 +1,4 @@
-import { MovieFormData } from '@root/common/interfaces/IMovie';
+import { GetMoviesPaginatedDTO, MovieFormData } from '@root/common/interfaces/IMovie';
 import MovieStorage from '@storage/movies/movies-storage';
 
 export default class MovieService {
@@ -11,6 +11,11 @@ export default class MovieService {
 
   async deleteMovie(movieId: string) {
     const  result = await this.MovieStorage.delete(movieId);
+    return result;
+  }
+
+  async getAllPaginated(conditions: GetMoviesPaginatedDTO) {
+    const  result = await this.MovieStorage.getAllPaginated(conditions);
     return result;
   }
 }

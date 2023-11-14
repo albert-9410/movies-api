@@ -37,3 +37,8 @@ export type MovieFormData = Pick<
   Movie,
   'title' | 'image' | 'director' | 'platforms' | 'imageMimeType'
 >;
+
+export interface GetMoviesPaginatedDTO extends Partial<Movie> {
+  page: number;
+  limit: number;
+}
