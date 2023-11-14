@@ -12,4 +12,9 @@ export default class MovieStorage {
    const movieCreated = await this.aMovieDao.create(movieData);
     return movieCreated;
   }
+
+  async delete(movieId: string) { 
+   const movieRemovedCount = await this.aMovieDao.delete(movieId);
+    return movieRemovedCount;
+  }
 }

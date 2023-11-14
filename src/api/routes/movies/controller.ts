@@ -17,4 +17,16 @@ export default class MovieController {
       return next(error);
     }
   };
+
+  deleteMovie: RequestHandler = async (req, res, next) => {
+    try {
+      const movieId = req.params.id;
+      console.log(movieId);
+      const response = await this.aMovieService.deleteMovie(movieId);
+      
+      return res.status(200).json({ data: response });
+    } catch (error) {
+      return next(error);
+    }
+  };
 }

@@ -8,4 +8,9 @@ export default class MovieService {
     const  result = await this.MovieStorage.save(movieFormData);
     return result;
   }
+
+  async deleteMovie(movieId: string) {
+    const  result = await this.MovieStorage.delete(movieId);
+    return result;
+  }
 }

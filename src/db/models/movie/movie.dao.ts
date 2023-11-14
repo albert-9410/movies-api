@@ -15,4 +15,13 @@ export default class MoviesDao {
     });
     return movieCreated;
   }
+
+  async delete(movieId: string) {
+    console.log(movieId);
+    const movieRemoved = await this.dataBaseConnection.models.movies.deleteOne({
+      _id: movieId
+    });
+
+    return movieRemoved?.deletedCount;
+  }
 }
