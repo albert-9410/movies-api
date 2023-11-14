@@ -14,6 +14,12 @@ module.exports = {
       alias: {
         map: [
           ['@root', './src'],
+          ['@db', './src/db'],
+          ['@models', './src/db/models'],
+          ['@interfaces', './src/common/interfaces'],
+          ['@storage', './src/storage'],
+          ['@services', './src/services'],
+          ['@middlewares', './src/api/middlewares'],
         ],
         extensions: ['.ts', '.js', '.json'],
       },
@@ -25,6 +31,8 @@ module.exports = {
       rules: {
         'max-len': ['error', { code: 120 }],
         complexity: ['error', { max: 10 }],
+        'no-console': 'off',
+        'import/extensions': ['.js', '.ts'],
       },
     },
   ],
