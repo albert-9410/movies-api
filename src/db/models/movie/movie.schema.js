@@ -1,4 +1,3 @@
-const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 
 module.exports = (connection) => {
@@ -6,7 +5,6 @@ module.exports = (connection) => {
     {
       id: {
         type: String,
-        default: uuidv4,
         required: true,
         unique: true,
       },

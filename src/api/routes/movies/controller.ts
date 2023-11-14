@@ -58,4 +58,15 @@ export default class MovieController {
       return next(error);
     }
   };
+
+  duplicate: RequestHandler = async (req, res, next) => {
+    try {
+      const movieId = req.params.id;
+      const response = await this.aMovieService.duplicateMovie(movieId);
+      
+      return res.status(200).json({ data: response });
+    } catch (error) {
+      return next(error);
+    }
+  };
 }

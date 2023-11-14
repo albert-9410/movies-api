@@ -1,4 +1,4 @@
-import { GetMoviesPaginatedDTO, MovieParamsToSave, UpdateMovieDTO } from "@interfaces/IMovie";
+import { GetMoviesPaginatedDTO, Movie, MovieParamsToSave, UpdateMovieDTO } from "@interfaces/IMovie";
 import mongooseInstance from "@db/connection";
 import mongoose from "mongoose";
 
@@ -18,7 +18,7 @@ export default class MoviesDao {
 
   async delete(movieId: string) {
     const movieRemoved = await this.dataBaseConnection.models.movies.deleteOne({
-      _id: movieId
+      id: movieId
     });
 
     return movieRemoved?.deletedCount;
@@ -39,9 +39,16 @@ export default class MoviesDao {
 
   async updateMovieById(movieId: string, movieUpdateData: UpdateMovieDTO) {
     const movieUpdated = await this.dataBaseConnection.models.movies.updateOne({
-      _id: movieId,
+      id: movieId,
     }, movieUpdateData)
 
     return movieUpdated;
+  }
+
+  async getById(movieId: string): Promise<Movie> {
+    const movie = await this.dataBaseConnection.models.movies.findOne({
+      id: movieId
+    });
+    return movie;
   }
 }

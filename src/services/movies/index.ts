@@ -23,4 +23,17 @@ export default class MovieService {
     const movieUpdated = await this.MovieStorage.update(movieId, movieUpdateData);
     return movieUpdated;
   }
+
+  async duplicateMovie(movieId: string) {
+    const movieToDuplicate = await this.MovieStorage.getById(movieId);
+    const  result = await this.MovieStorage.save({
+      title: movieToDuplicate.title,
+      director: movieToDuplicate.director,
+      image: movieToDuplicate.image,
+      imageMimeType: movieToDuplicate.imageMimeType,
+      platforms: movieToDuplicate.platforms,
+      reviews: movieToDuplicate.reviews,
+    });
+    return result;
+  }
 }

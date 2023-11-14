@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { GetMoviesPaginatedDTO, Movie, MovieParamsToSave, UpdateMovieDTO } from '@interfaces/IMovie';
 import MoviesDao from '@root/db/models/movie/movie.dao';
 
@@ -9,7 +10,10 @@ export default class MovieStorage {
   }
 
   async save(movieData: MovieParamsToSave): Promise<Movie> {
-   const movieCreated = await this.aMovieDao.create(movieData);
+   const movieCreated = await this.aMovieDao.create({
+    ...movieData,
+    id: uuidv4()
+  });
     return movieCreated;
   }
 
@@ -26,5 +30,10 @@ export default class MovieStorage {
   async update(movieId: string, movieUpdateData: UpdateMovieDTO) { 
     const movieUpdated = await this.aMovieDao.updateMovieById(movieId, movieUpdateData);
      return movieUpdated;
+   }
+  
+  async getById(movieId: string): Promise<Movie> { 
+    const movie = await this.aMovieDao.getById(movieId);
+     return movie;
    }
 }
