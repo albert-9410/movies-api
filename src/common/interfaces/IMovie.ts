@@ -42,3 +42,11 @@ export interface GetMoviesPaginatedDTO extends Partial<Movie> {
   page: number;
   limit: number;
 }
+
+export interface UpdateMovieDTO {
+  title?: string;
+  director?: string;
+  image?: Buffer;
+  imageMimeType?: string;
+  platforms?: string[];
+}

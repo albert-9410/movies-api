@@ -22,7 +22,6 @@ export default class MovieController {
   deleteMovie: RequestHandler = async (req, res, next) => {
     try {
       const movieId = req.params.id;
-      console.log(movieId);
       const response = await this.aMovieService.deleteMovie(movieId);
       
       return res.status(200).json({ data: response });
@@ -35,6 +34,24 @@ export default class MovieController {
     try {
       const conditions = req.query as unknown as GetMoviesPaginatedDTO;
       const response = await this.aMovieService.getAllPaginated(conditions);
+      
+      return res.status(200).json({ data: response });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  update: RequestHandler = async (req, res, next) => {
+    try {
+      const movieId = req.params.id;
+      const movieParamsToUpdate = req.body;
+  
+      if (req.file) {
+        movieParamsToUpdate.image = req.file?.buffer;
+        movieParamsToUpdate.imageMimeType = req.file?.mimetype;
+      }
+  
+      const response = await this.aMovieService.updateMovie(movieId, movieParamsToUpdate);
       
       return res.status(200).json({ data: response });
     } catch (error) {

@@ -1,4 +1,4 @@
-import { GetMoviesPaginatedDTO, Movie, MovieParamsToSave } from '@interfaces/IMovie';
+import { GetMoviesPaginatedDTO, Movie, MovieParamsToSave, UpdateMovieDTO } from '@interfaces/IMovie';
 import MoviesDao from '@root/db/models/movie/movie.dao';
 
 export default class MovieStorage {
@@ -22,4 +22,9 @@ export default class MovieStorage {
    const movieRemovedCount = await this.aMovieDao.getAllPaginated(conditions);
     return movieRemovedCount;
   }
+
+  async update(movieId: string, movieUpdateData: UpdateMovieDTO) { 
+    const movieUpdated = await this.aMovieDao.updateMovieById(movieId, movieUpdateData);
+     return movieUpdated;
+   }
 }

@@ -1,4 +1,4 @@
-import { GetMoviesPaginatedDTO, MovieParamsToSave } from "@interfaces/IMovie";
+import { GetMoviesPaginatedDTO, MovieParamsToSave, UpdateMovieDTO } from "@interfaces/IMovie";
 import mongooseInstance from "@db/connection";
 import mongoose from "mongoose";
 
@@ -17,7 +17,6 @@ export default class MoviesDao {
   }
 
   async delete(movieId: string) {
-    console.log(movieId);
     const movieRemoved = await this.dataBaseConnection.models.movies.deleteOne({
       _id: movieId
     });
@@ -35,5 +34,14 @@ export default class MoviesDao {
     .limit(Number(limit));
 
     return movies;
+  }
+
+
+  async updateMovieById(movieId: string, movieUpdateData: UpdateMovieDTO) {
+    const movieUpdated = await this.dataBaseConnection.models.movies.updateOne({
+      _id: movieId,
+    }, movieUpdateData)
+
+    return movieUpdated;
   }
 }

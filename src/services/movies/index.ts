@@ -1,4 +1,4 @@
-import { GetMoviesPaginatedDTO, MovieFormData } from '@root/common/interfaces/IMovie';
+import { GetMoviesPaginatedDTO, MovieFormData, UpdateMovieDTO } from '@root/common/interfaces/IMovie';
 import MovieStorage from '@storage/movies/movies-storage';
 
 export default class MovieService {
@@ -17,5 +17,10 @@ export default class MovieService {
   async getAllPaginated(conditions: GetMoviesPaginatedDTO) {
     const  result = await this.MovieStorage.getAllPaginated(conditions);
     return result;
+  }
+
+  async updateMovie(movieId:string, movieUpdateData: UpdateMovieDTO) {
+    const movieUpdated = await this.MovieStorage.update(movieId, movieUpdateData);
+    return movieUpdated;
   }
 }
