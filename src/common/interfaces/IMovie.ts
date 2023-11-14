@@ -32,7 +32,6 @@ export interface MovieParamsToSave {
   reviews?: Review[];
 }
 
-
 export type MovieFormData = Pick<
   Movie,
   'title' | 'image' | 'director' | 'platforms' | 'imageMimeType'

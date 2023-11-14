@@ -11,7 +11,7 @@ app.use(
     limits: {
       fileSize: 10 * 1024 * 1024,
     },
-  }).single('image')
+  }).single('image'),
 );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

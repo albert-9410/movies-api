@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { GetMoviesPaginatedDTO, Movie, MovieParamsToSave, UpdateMovieDTO } from '@interfaces/IMovie';
+import {
+  GetMoviesPaginatedDTO, Movie, MovieParamsToSave, UpdateMovieDTO,
+} from '@interfaces/IMovie';
 import MoviesDao from '@root/db/models/movie/movie.dao';
 
 export default class MovieStorage {
@@ -10,30 +12,30 @@ export default class MovieStorage {
   }
 
   async save(movieData: MovieParamsToSave): Promise<Movie> {
-   const movieCreated = await this.aMovieDao.create({
-    ...movieData,
-    id: uuidv4()
-  });
+    const movieCreated = await this.aMovieDao.create({
+      ...movieData,
+      id: uuidv4(),
+    });
     return movieCreated;
   }
 
-  async delete(movieId: string) { 
-   const movieRemovedCount = await this.aMovieDao.delete(movieId);
+  async delete(movieId: string) {
+    const movieRemovedCount = await this.aMovieDao.delete(movieId);
     return movieRemovedCount;
   }
 
-  async getAllPaginated(conditions: GetMoviesPaginatedDTO) { 
-   const movieRemovedCount = await this.aMovieDao.getAllPaginated(conditions);
+  async getAllPaginated(conditions: GetMoviesPaginatedDTO) {
+    const movieRemovedCount = await this.aMovieDao.getAllPaginated(conditions);
     return movieRemovedCount;
   }
 
-  async update(movieId: string, movieUpdateData: UpdateMovieDTO) { 
+  async update(movieId: string, movieUpdateData: UpdateMovieDTO) {
     const movieUpdated = await this.aMovieDao.updateMovieById(movieId, movieUpdateData);
-     return movieUpdated;
-   }
-  
-  async getById(movieId: string): Promise<Movie> { 
+    return movieUpdated;
+  }
+
+  async getById(movieId: string): Promise<Movie> {
     const movie = await this.aMovieDao.getById(movieId);
-     return movie;
-   }
+    return movie;
+  }
 }

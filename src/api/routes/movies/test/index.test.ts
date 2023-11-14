@@ -1,13 +1,16 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable import/no-extraneous-dependencies */
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../../../app';
 
-describe('Movie Integrations Test', function () {
-  describe('Create Movie Tests', function () {
+describe('Movie Integrations Test', () => {
+  describe('Create Movie Tests', () => {
     const endpoint = '/api/movie';
 
-    it('when send movie title, director, platfomrs and image, then save the movie and return the movie data.', async () => {
-
+    it(`when send movie title, director, platforms and image, 
+    then save the movie and return the movie data.`, async () => {
       const { status, body } = await request(app)
         .post(endpoint)
         .field('title', 'spiderman')

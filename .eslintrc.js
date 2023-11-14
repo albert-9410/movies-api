@@ -32,8 +32,14 @@ module.exports = {
         'max-len': ['error', { code: 120 }],
         complexity: ['error', { max: 10 }],
         'no-console': 'off',
-        'import/extensions': ['.js', '.ts'],
+        'import/extensions': ['error', 'ignorePackages', {
+          js: 'never',
+          ts: 'never',
+        }],
       },
     },
   ],
+  env: {
+    mocha: true,
+  },
 };

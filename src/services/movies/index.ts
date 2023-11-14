@@ -5,17 +5,17 @@ export default class MovieService {
   private MovieStorage = new MovieStorage();
 
   async createMovie(movieFormData: MovieFormData) {
-    const  result = await this.MovieStorage.save(movieFormData);
+    const result = await this.MovieStorage.save(movieFormData);
     return result;
   }
 
   async deleteMovie(movieId: string) {
-    const  result = await this.MovieStorage.delete(movieId);
+    const result = await this.MovieStorage.delete(movieId);
     return result;
   }
 
   async getAllPaginated(conditions: GetMoviesPaginatedDTO) {
-    const  result = await this.MovieStorage.getAllPaginated(conditions);
+    const result = await this.MovieStorage.getAllPaginated(conditions);
     return result;
   }
 
@@ -26,7 +26,7 @@ export default class MovieService {
 
   async duplicateMovie(movieId: string) {
     const movieToDuplicate = await this.MovieStorage.getById(movieId);
-    const  result = await this.MovieStorage.save({
+    const result = await this.MovieStorage.save({
       title: movieToDuplicate.title,
       director: movieToDuplicate.director,
       image: movieToDuplicate.image,

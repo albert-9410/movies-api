@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+/* eslint-disable import/no-dynamic-require */
 import fs from 'fs';
 import mongoose from 'mongoose';
 import config from '@root/config';
@@ -27,7 +29,7 @@ fs.readdirSync(modelsPath)
     fs.readdirSync(`${modelsPath}/${collection}`)
       .filter((file) => file.endsWith('.schema.js'))
       .forEach((file) => {
-          require(`${modelsPath}/${collection}/${file}`)(mongooseInstance);
+        require(`${modelsPath}/${collection}/${file}`)(mongooseInstance);
       });
   });
 

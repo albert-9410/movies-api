@@ -9,7 +9,7 @@ export default class PlatformStorage {
   }
 
   async getAll(): Promise<Platform[]> {
-   const platforms = await this.aPlatformDao.getAll();
+    const platforms = await this.aPlatformDao.getAll();
     return platforms;
   }
 }
