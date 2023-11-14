@@ -1,8 +1,12 @@
-import { GetMoviesPaginatedDTO, MovieFormData, UpdateMovieDTO } from '@root/common/interfaces/IMovie';
+import { GetMoviesPaginatedDTO, MovieFormData, UpdateMovieDTO } from '@interfaces/IMovie';
+import { Review } from '@interfaces/IReview';
 import MovieStorage from '@storage/movies/movies-storage';
+import ReviewStorage from '@storage/reviews/review-storage';
 
 export default class MovieService {
   private MovieStorage = new MovieStorage();
+
+  private ReviewStorage = new ReviewStorage();
 
   async createMovie(movieFormData: MovieFormData) {
     const result = await this.MovieStorage.save(movieFormData);
@@ -36,5 +40,11 @@ export default class MovieService {
       reviews: movieToDuplicate.reviews,
     });
     return result;
+  }
+
+  async createMovieReview(review: Review) {
+    const reviewCrated = await this.ReviewStorage.save(review);
+    await this.MovieStorage.addMovieReview(review.movieId, reviewCrated.id);
+    return reviewCrated;
   }
 }

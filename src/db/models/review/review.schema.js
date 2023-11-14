@@ -1,20 +1,36 @@
 const mongoose = require('mongoose');
 
 module.exports = (connection) => {
-  const PlatformSchema = new mongoose.Schema(
+  const ReviewSchema = new mongoose.Schema(
     {
       _id: {
         type: String,
         required: true,
         unique: true,
       },
-      icon: {
+      movieId: {
+        type: String,
+        ref: 'movies',
+        required: true,
+      },
+      platformId: {
+        type: String,
+        ref: 'platforms',
+        required: true,
+      },
+      author: {
         type: String,
         required: true,
       },
-      title: {
+      body: {
         type: String,
         required: true,
+      },
+      score: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 5,
       },
       createdAt: {
         type: Date,
@@ -32,6 +48,6 @@ module.exports = (connection) => {
     },
   );
 
-  const platformsModel = connection.model('platforms', PlatformSchema);
-  return platformsModel;
+  const ReviewModel = connection.model('reviews', ReviewSchema);
+  return ReviewModel;
 };

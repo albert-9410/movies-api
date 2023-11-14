@@ -1,7 +1,7 @@
 const { MongoClient, ObjectId } = require('mongodb');
 const config = require('../src/config');
 
-const uri = config.database_host
+const uri = config.database_host;
 const dbName = 'movies';
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -15,17 +15,17 @@ async function run() {
 
     const platformData = [
       {
-				_id: new ObjectId('5fb3a45c3df54939b6a7b1f2'),
+        _id: 'netflixId',
         icon: 'netflix-icon.jpg',
         title: 'Netflix',
       },
-			{
-				_id: new ObjectId('6fb3a45c3df54939b6a7b1f3'),
+      {
+        _id: 'HBOId',
         icon: 'HBO-icon.jpg',
         title: 'HBO',
       },
-			{
-				_id: new ObjectId('7fb3a45c3df54939b6a7b1f4'),
+      {
+        _id: 'AmazonId',
         icon: 'Amazon-prime-icon.jpg',
         title: 'amazon prime',
       },
@@ -33,7 +33,6 @@ async function run() {
 
     const result = await platformCollection.insertMany(platformData);
     console.log(`${result.insertedCount} documents inserted`);
-
   } finally {
     await client.close();
     console.log('close connection');

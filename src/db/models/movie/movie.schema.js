@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 module.exports = (connection) => {
   const MovieSchema = new mongoose.Schema(
     {
-      id: {
+      _id: {
         type: String,
         required: true,
         unique: true,
@@ -26,8 +26,8 @@ module.exports = (connection) => {
       },
       platforms: [
         {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Platform',
+          type: String,
+          ref: 'platforms',
         },
       ],
       score: {
@@ -44,8 +44,8 @@ module.exports = (connection) => {
       },
       reviews: [
         {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Review',
+          type: String,
+          ref: 'reviews',
         },
       ],
     },
@@ -53,7 +53,7 @@ module.exports = (connection) => {
       strict: false,
       minimize: false,
       timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
-    }
+    },
   );
 
   const MovieModel = connection.model('movies', MovieSchema);

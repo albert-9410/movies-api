@@ -1,11 +1,5 @@
-export interface Review {
-  reviewer: string;
-  rating: number;
-  comment: string;
-}
-
 export interface Movie {
-  id: string;
+  _id: string;
   title: string;
   slug?: string;
   image: Buffer;
@@ -15,11 +9,11 @@ export interface Movie {
   score?: number;
   createdAt: Date;
   updatedAt: Date;
-  reviews: Review[];
+  reviews: string[];
 }
 
 export interface MovieParamsToSave {
-  id?: string;
+  _id?: string;
   title: string;
   slug?: string;
   image: Buffer;
@@ -29,7 +23,7 @@ export interface MovieParamsToSave {
   score?: number;
   createdAt?: Date;
   updatedAt?: Date;
-  reviews?: Review[];
+  reviews?: string[];
 }
 
 export type MovieFormData = Pick<

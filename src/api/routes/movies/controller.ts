@@ -69,4 +69,17 @@ export default class MovieController {
       return next(error);
     }
   };
+
+  createMovieReview: RequestHandler = async (req, res, next) => {
+    try {
+      const reviewData = req.body;
+      reviewData.movieId = req.params.id;
+      reviewData.platformId = req.params.platform_id;
+      const response = await this.aMovieService.createMovieReview(reviewData);
+
+      return res.status(200).json({ data: response });
+    } catch (error) {
+      return next(error);
+    }
+  };
 }

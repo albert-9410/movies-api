@@ -14,7 +14,7 @@ export default class MovieStorage {
   async save(movieData: MovieParamsToSave): Promise<Movie> {
     const movieCreated = await this.aMovieDao.create({
       ...movieData,
-      id: uuidv4(),
+      _id: uuidv4(),
     });
     return movieCreated;
   }
@@ -37,5 +37,10 @@ export default class MovieStorage {
   async getById(movieId: string): Promise<Movie> {
     const movie = await this.aMovieDao.getById(movieId);
     return movie;
+  }
+
+  async addMovieReview(movieId: string, reviewId: string) {
+    const movieUpdated = await this.aMovieDao.addMovieReview(movieId, reviewId);
+    return movieUpdated;
   }
 }

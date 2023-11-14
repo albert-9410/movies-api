@@ -22,7 +22,6 @@ describe('Movie Integrations Test', () => {
       expect(body.data?.platforms).to.be.eql(['5fb3a45c3df54939b6a7b1f2', '6fb3a45c3df54939b6a7b1f3']);
       expect(body.data?.reviews).to.be.eql([]);
       expect(body.data?._id).to.be.string;
-      expect(body.data?.id).to.be.string;
       expect(body.data?.title).to.be.eql('spiderman');
       expect(body.data?.director).to.be.eql('alberto');
       expect(body.data?.image?.type).to.be.eql('Buffer');
