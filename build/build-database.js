@@ -31,8 +31,18 @@ async function run() {
       },
     ];
 
-    const result = await platformCollection.insertMany(platformData);
-    console.log(`${result.insertedCount} documents inserted`);
+    const resultPlatforms = await platformCollection.insertMany(platformData);
+
+    const users = [
+      {
+        _id: 'userId1',
+        username: 'admin',
+        password: '123456',
+      },
+    ];
+    const usersCollection = db.collection('users');
+    const resultUsers = await usersCollection.insertMany(users);
+    console.log(`${resultPlatforms.insertedCount + resultUsers.insertedCount} documents inserted`);
   } finally {
     await client.close();
     console.log('close connection');

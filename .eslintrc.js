@@ -20,6 +20,7 @@ module.exports = {
           ['@storage', './src/storage'],
           ['@services', './src/services'],
           ['@middlewares', './src/api/middlewares'],
+          ['@constants', './src/common/constants'],
         ],
         extensions: ['.ts', '.js', '.json'],
       },

@@ -5,12 +5,21 @@ import { expect } from 'chai';
 import request from 'supertest';
 import * as mocks from './mocks';
 import app from '../../../../app';
+import AuthService from '../../../../services/auth';
 import MovieDao from '../../../../db/models/movie/movie.dao';
+
+const getToken = async () => {
+  const anAuthService = new AuthService();
+  const token = await anAuthService.login('admin', '123456');
+  return `Bearer ${token}`;
+};
 
 describe('Movie Integrations Test', () => {
   const aMovieDao = new MovieDao();
+  let token = '';
 
   before('seed db', async () => {
+    token = await getToken();
     await aMovieDao.bulkCreate(mocks.moviesMocks);
   });
 
@@ -23,7 +32,8 @@ describe('Movie Integrations Test', () => {
 
     it('when request the movie, then return movies paginated', async () => {
       const { status, body } = await request(app)
-        .get(endpoint);
+        .get(endpoint)
+        .set('Authorization', token);
 
       const bodyDataParsed = body?.data?.map((bodyData) => ({
         title: bodyData.title,
@@ -50,7 +60,8 @@ describe('Movie Integrations Test', () => {
         .field('director', 'alberto')
         .field('platforms[]', '5fb3a45c3df54939b6a7b1f2')
         .field('platforms[]', '6fb3a45c3df54939b6a7b1f3')
-        .attach('image', `${__dirname}/images/test.png`);
+        .attach('image', `${__dirname}/images/test.png`)
+        .set('Authorization', token);
 
       expect(body.data?.platforms).to.be.eql(['5fb3a45c3df54939b6a7b1f2', '6fb3a45c3df54939b6a7b1f3']);
       expect(body.data?.reviews).to.be.eql([]);
@@ -70,7 +81,8 @@ describe('Movie Integrations Test', () => {
       const newTitle = 'name updated';
       const { status, body } = await request(app)
         .patch(`${endpoint}/${movieToUpdate._id}`)
-        .field('title', newTitle);
+        .field('title', newTitle)
+        .set('Authorization', token);
 
       const movieParsed = {
         title: body.data.title,
@@ -93,7 +105,8 @@ describe('Movie Integrations Test', () => {
     it('when request to delete movie, then return the number of movies deleted', async () => {
       const movieToDelete = mocks.moviesMocks[1];
       const { status, body } = await request(app)
-        .delete(`${endpoint}/${movieToDelete._id}`);
+        .delete(`${endpoint}/${movieToDelete._id}`)
+        .set('Authorization', token);
 
       expect(body.data).to.be.eql(1);
       expect(status).to.be.eql(200);
