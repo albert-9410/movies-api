@@ -26,4 +26,20 @@ export default class ReviewDao {
 
     return reviewsGrouped;
   }
+
+  async getMovieAverageScore(movieId: string): Promise<number> {
+    const result = await this.dataBaseConnection.models.reviews.aggregate([
+      {
+        $match: { movieId },
+      },
+      {
+        $group: {
+          _id: '$movieId',
+          averageScore: { $avg: '$score' },
+        },
+      },
+    ]);
+
+    return result?.[0]?.averageScore;
+  }
 }

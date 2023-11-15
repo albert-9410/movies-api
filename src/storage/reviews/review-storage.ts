@@ -18,4 +18,9 @@ export default class PlatformStorage {
     const reviewsGrouped = await this.aReviewDao.getMovieReviewsGroupedByPlatform(movieId);
     return reviewsGrouped;
   }
+
+  async getMovieAverageScore(movieId: string): Promise<number> {
+    const reviewsGrouped = await this.aReviewDao.getMovieAverageScore(movieId);
+    return reviewsGrouped;
+  }
 }

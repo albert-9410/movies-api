@@ -42,4 +42,5 @@ export interface UpdateMovieDTO {
   image?: Buffer;
   imageMimeType?: string;
   platforms?: string[];
+  score?: number;
 }

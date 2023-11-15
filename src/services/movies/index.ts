@@ -45,6 +45,7 @@ export default class MovieService {
   async createMovieReview(review: Review) {
     const reviewCrated = await this.ReviewStorage.save(review);
     await this.MovieStorage.addMovieReview(review.movieId, reviewCrated.id);
+    this.updateMovieScore(review.movieId);
     return reviewCrated;
   }
 
@@ -58,5 +59,11 @@ export default class MovieService {
       ...movieData,
       reviewsGroupedByPlatforms,
     };
+  }
+
+  async updateMovieScore(movieId: string) {
+    const newScore = await this.ReviewStorage.getMovieAverageScore(movieId);
+    await this.MovieStorage.update(movieId, { score: newScore });
+    return this.MovieStorage.getById(movieId);
   }
 }
