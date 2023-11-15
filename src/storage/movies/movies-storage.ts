@@ -14,6 +14,7 @@ export default class MovieStorage {
   async save(movieData: MovieParamsToSave): Promise<Movie> {
     const movieCreated = await this.aMovieDao.create({
       ...movieData,
+      slug: movieData.title.toLowerCase().replace(/\s+/g, '-'),
       _id: uuidv4(),
     });
     return movieCreated;
