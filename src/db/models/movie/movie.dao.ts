@@ -43,7 +43,7 @@ export default class MoviesDao {
     const movie = await this.dataBaseConnection.models.movies.findOne({
       _id: movieId,
     });
-    return movie;
+    return movie?.toObject();
   }
 
   async addMovieReview(movieId: string, reviewId: string) {

@@ -12,4 +12,18 @@ export default class ReviewDao {
     });
     return reviewCreated;
   }
+
+  async getMovieReviewsGroupedByPlatform(movieId: string) {
+    const reviewsGrouped = await this.dataBaseConnection.models.reviews.aggregate([
+      { $match: { movieId } },
+      {
+        $group: {
+          _id: '$platformId',
+          reviews: { $push: '$$ROOT' },
+        },
+      },
+    ]);
+
+    return reviewsGrouped;
+  }
 }

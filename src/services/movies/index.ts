@@ -23,7 +23,7 @@ export default class MovieService {
     return result;
   }
 
-  async updateMovie(movieId:string, movieUpdateData: UpdateMovieDTO) {
+  async updateMovie(movieId: string, movieUpdateData: UpdateMovieDTO) {
     await this.MovieStorage.update(movieId, movieUpdateData);
     const movieUpdated = this.MovieStorage.getById(movieId);
     return movieUpdated;
@@ -46,5 +46,17 @@ export default class MovieService {
     const reviewCrated = await this.ReviewStorage.save(review);
     await this.MovieStorage.addMovieReview(review.movieId, reviewCrated.id);
     return reviewCrated;
+  }
+
+  async getMovieWithReviewsGroupedByPlatform(movieId: string) {
+    const [movieData, reviewsGroupedByPlatforms] = await Promise.all([
+      this.MovieStorage.getById(movieId),
+      this.ReviewStorage.getMovieReviewsGroupedByPlatform(movieId),
+    ]);
+
+    return {
+      ...movieData,
+      reviewsGroupedByPlatforms,
+    };
   }
 }

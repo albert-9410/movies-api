@@ -13,4 +13,9 @@ export default class PlatformStorage {
     const reviewCreated = await this.aReviewDao.save({ ...review, _id: uuidv4() });
     return reviewCreated;
   }
+
+  async getMovieReviewsGroupedByPlatform(movieId: string) {
+    const reviewsGrouped = await this.aReviewDao.getMovieReviewsGroupedByPlatform(movieId);
+    return reviewsGrouped;
+  }
 }
