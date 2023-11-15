@@ -56,4 +56,14 @@ export default class MoviesDao {
     );
     return movieUpdated;
   }
+
+  async bulkCreate(movies: Movie[]) {
+    const result = await this.dataBaseConnection.models.movies.insertMany(movies);
+    return result;
+  }
+
+  async clearAll() {
+    const result = await this.dataBaseConnection.models.movies.deleteMany();
+    return result;
+  }
 }
