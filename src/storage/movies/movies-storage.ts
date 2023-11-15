@@ -24,9 +24,17 @@ export default class MovieStorage {
     return movieRemovedCount;
   }
 
-  async getAllPaginated(conditions: GetMoviesPaginatedDTO) {
-    const movieRemovedCount = await this.aMovieDao.getAllPaginated(conditions);
-    return movieRemovedCount;
+  async getAllPaginated({
+    page = 1,
+    limit = 10,
+    ...conditions
+  }: GetMoviesPaginatedDTO) {
+    const movies = await this.aMovieDao.getAllPaginated({
+      ...conditions,
+      page,
+      limit,
+    });
+    return { data: movies, pagination: { page, limit } };
   }
 
   async update(movieId: string, movieUpdateData: UpdateMovieDTO) {

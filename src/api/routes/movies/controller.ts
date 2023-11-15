@@ -35,7 +35,7 @@ export default class MovieController {
       const conditions = req.query as unknown as GetMoviesPaginatedDTO;
       const response = await this.aMovieService.getAllPaginated(conditions);
 
-      return res.status(200).json({ data: response });
+      return res.status(200).json(response);
     } catch (error) {
       return next(error);
     }
